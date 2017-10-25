@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# python3 and pycharm on windows 7
+
 import requests
 from bs4 import BeautifulSoup
 import re
