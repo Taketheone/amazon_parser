@@ -12,8 +12,8 @@ class Keyword_to_listing():
     def __init__(self):
         #关键词列表，注意英文引号+英文逗号，爬取的资料保存在listing info文件夹下同名关键词文件夹里
         self.keyword_list = [
-            "hands free dog leash",
-        ]
+                            "hands free dog leash",
+                            ]
         #爬取页数
         self.max_page = 3
         #每爬取一个网页后休息的时间秒数，爬取太快会导致爬虫被禁
@@ -52,7 +52,6 @@ class Keyword_to_listing():
             {'User-Agent': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'}
         ]
         headers = random.choice(headers_list)
-        # print("headers: ", headers)
         china_proxies_list = [
             {'http:': 'http://123.56.169.22:3128'},
             {'http:': 'http://121.196.226.246:84'},
@@ -86,7 +85,6 @@ class Keyword_to_listing():
         ]
         # proxies = random.choice(usa_proxies_list)
         proxies = random.choice(china_proxies_list)
-        # print("proxies: ", proxies)
         # r = requests.get(url, headers=headers)
         r = requests.get(url, headers=headers, proxies=proxies)
         # print("Downloading: r.status_code=", r.status_code)
@@ -99,15 +97,11 @@ class Keyword_to_listing():
 
         # soup = BeautifulSoup(r.content, 'html.parser')
         soup = BeautifulSoup(r.text.encode(r.encoding).decode('utf-8'), 'html.parser')
-        # soup = BeautifulSoup(r.read(), 'html.parser')
-        # soup = BeautifulSoup(r.content.decode('utf-8'), 'html.parser')
-        # soup = BeautifulSoup(r.content, 'html5lib')
         time.sleep(self.sleep_time)
         return soup
 
     def download_picture_by_url(self):
         print("start to download picture...")
-
         try:
             pic = requests.get(self.picture_url, timeout=10)
             picture_name = self.picture_folder + "/"+ str(self.asin) + '.jpg'
@@ -330,7 +324,6 @@ class Keyword_to_listing():
                              "qa_num": qa_num,
                              "picture_url": picture_url
                              }
-        # print(listing_info_dict)
         return listing_info_dict
 
     def keyword_to_all_listing_asin_list(self):
@@ -387,6 +380,7 @@ class Keyword_to_listing():
                         self.listing_info_dict_list.append(listing_info_dict)
                         try:
                             self.picture_url = listing_info_dict['picture_url']
+                            # 此处设置是否下载首图，不下载首图的话可以把下面一句注释掉
                             self.download_picture_by_url()
                         except:
                             pass
