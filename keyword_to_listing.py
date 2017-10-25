@@ -2,7 +2,9 @@
 
 # python3 and pycharm on windows 7
 # 主要用于爬取亚马逊美国站宠物类目产品，其他类目未测试
-# 默认下载到pycharm项目文件夹下listing info文件夹内
+# self.keyword_list里填入要爬取的关键词，要爬取搜索页的页数（不是listing页数），一般一个搜索页包含20-40个listing
+# 默认下载到pycharm项目文件夹下listing info文件夹内的，以关键词命名的文件夹里
+# 如要爬取的关键词为dog toys，则下载到:pycharm项目文件夹/listing info/dog toys/
 # 下载的listing首图以ASIN命名
 # 下载的listing info数据存储在csv文件内，文件名是下载开始时间
 # author: larry
@@ -24,7 +26,7 @@ class Keyword_to_listing():
                             "hands free dog leash",
                             "dog toys",
                             ]
-        #爬取页数
+        #爬取搜索页的页数
         self.max_page = 3
         #每爬取一个网页后休息的时间秒数，爬取太快会导致爬虫被禁
         #爬取一个页面耗时约1s，建议sleep_time设置为1s，所以爬取一个页面耗时约2s
@@ -97,6 +99,7 @@ class Keyword_to_listing():
         ]
         # proxies = random.choice(usa_proxies_list)
         proxies = random.choice(china_proxies_list)
+        
         # r = requests.get(url, headers=headers)
         r = requests.get(url, headers=headers, proxies=proxies)
         # print("Downloading: r.status_code=", r.status_code)
