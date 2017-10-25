@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
+
 # python3 and pycharm on windows 7
+# 主要用于爬取亚马逊美国站宠物类目产品，其他类目未测试
+# 默认下载到pycharm项目文件夹下listing info文件夹内
+# 下载的listing首图以ASIN命名
+# 下载的listing info数据存储在csv文件内，文件名是下载开始时间
+# author: larry
+# email: dg1245@qq.com
 
 import requests
 from bs4 import BeautifulSoup
@@ -15,11 +22,14 @@ class Keyword_to_listing():
         #关键词列表，注意英文引号+英文逗号，爬取的资料保存在listing info文件夹下同名关键词文件夹里
         self.keyword_list = [
                             "hands free dog leash",
+                            "dog toys",
                             ]
         #爬取页数
         self.max_page = 3
         #每爬取一个网页后休息的时间秒数，爬取太快会导致爬虫被禁
-        self.sleep_time = 0
+        #爬取一个页面耗时约1s，建议sleep_time设置为1s，所以爬取一个页面耗时约2s
+        self.sleep_time = 1
+        
         #下面的不用修改
         self.csv_file_name = ""
         self.picture_folder = ""
